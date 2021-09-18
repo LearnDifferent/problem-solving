@@ -5,7 +5,7 @@ A collection of some problems and their corresponding solutions
 
 解决音频和视频无法播放：
 
-```
+```bash
 # 使用这个命令行重启
 sudo launchctl stop com.apple.audio.coreaudiod && sudo launchctl start com.apple.audio.coreaudiod
 
