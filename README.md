@@ -34,3 +34,21 @@ cd /Users/{用户名}/Library/Application Support/JetBrains/IntelliJIdea2020.3/p
 ```
 
 2. 找到并删除该插件
+
+## 命令行代理
+
+使用代理服务的时候，如果让命令行也通过代理来连接网络，可以这样设置：
+
+使用 `vim ~/.bash_profile` 去编辑 Bash 的配置。在该配置中加入：
+
+```
+my_proxy_url=http://127.0.0.1:1185
+alias proxyon='export http_proxy=$my_proxy_url; export https_proxy=$my_proxy_url'
+alias proxyoff='unset http_proxy;unset https_proxy'
+```
+
+如果使用了 zsh，就 `vim ~/.zshrc` 打开其配置。然后加入一行 `source ~/.bash_profile` 即可。
+
+最后 `source ~/.zshrc` / `source ~/.bash_profile` 让配置生效。
+
+使用的时候，输入 `proxyon` 打开命令行，输入 `proxyoff` 关闭命令行代理。
