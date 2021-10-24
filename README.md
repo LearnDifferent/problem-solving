@@ -39,7 +39,7 @@ cd /Users/{用户名}/Library/Application Support/JetBrains/IntelliJIdea2020.3/p
 
 使用代理服务的时候，如果让命令行也通过代理来连接网络，可以这样设置：
 
-使用 `vim ~/.bash_profile` 去编辑 Bash 的配置。在该配置中加入：
+使用 `vim ~/.bashrc` 或 `vim ~/.bash_profile` 去编辑 Bash 的配置。在该配置中加入：
 
 ```
 my_proxy_url=http://127.0.0.1:1185
@@ -52,3 +52,9 @@ alias proxyoff='unset http_proxy;unset https_proxy'
 最后 `source ~/.zshrc` / `source ~/.bash_profile` 让配置生效。
 
 使用的时候，输入 `proxyon` 打开命令行，输入 `proxyoff` 关闭命令行代理。
+
+## 想在 Shell 中使用 vi 模式
+
+在 Bash 下使用和 VIM 一样的操作模式，可以在命令行中输入 `set -o vi`。
+
+也可以直接将 `set -o vi` 加入到 `~/.bashrc` 或 `~/.bash_profile` 配置文件中。
