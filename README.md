@@ -58,3 +58,9 @@ alias proxyoff='unset http_proxy;unset https_proxy'
 在 Bash 下使用和 VIM 一样的操作模式，可以在命令行中输入 `set -o vi`。
 
 也可以直接将 `set -o vi` 加入到 `~/.bashrc` 或 `~/.bash_profile` 配置文件中。
+
+## IDEA 中的 IdeaVim 插件，如何实现自动切换输入法
+
+解决方案：[IdeaVim扩展](https://github.com/hadix-lin/ideavim_extension)
+
+首先，在 IDEA 中获取 IdeaVimExtension 插件并安装。然后，在命令行中 `vim ~/.ideavimrc`，添加 `set keep-english-in-normal-and-restore-in-insert`。重启 IDEA，即可。
