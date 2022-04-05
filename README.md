@@ -64,3 +64,13 @@ alias proxyoff='unset http_proxy;unset https_proxy'
 解决方案：[IdeaVim扩展](https://github.com/hadix-lin/ideavim_extension)
 
 首先，在 IDEA 中获取 IdeaVimExtension 插件并安装。然后，在命令行中 `vim ~/.ideavimrc`，添加 `set keep-english-in-normal-and-restore-in-insert`。重启 IDEA，即可。
+
+## 在 Spring Boot 的 yaml (.yml) 文件中，使用冒号
+
+解决方案来自 [How to escape indicator characters (i.e. : or - ) in YAML](https://stackoverflow.com/questions/11301650/how-to-escape-indicator-characters-i-e-or-in-yaml) 中 [Andy Brown 的回答](https://stackoverflow.com/a/52757905)：
+
+>If you're using @ConfigurationProperties with Spring Boot 2 to inject maps with keys that contain colons then you need an additional level of escaping using square brackets inside the quotes because spring only allows alphanumeric and '-' characters, stripping out the rest. Your new key would look like this:
+
+```yaml
+"[8.11.32.120:8000]": GoogleMapsKeyforThisDomain
+```
