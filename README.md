@@ -74,3 +74,26 @@ alias proxyoff='unset http_proxy;unset https_proxy'
 ```yaml
 "[8.11.32.120:8000]": GoogleMapsKeyforThisDomain
 ```
+
+## 命令行无法连接 GitHub
+
+当命令行出现：`ssh: connect to host github.com port 22: Connection timed out` 时，可以采取如下办法解决。
+
+解决方案：GitHub 允许使用 443 端口进行 ssh 连接
+
+1. 首先运行下面的命令，然后根据提示查看是否可以成功：
+
+```bash
+ssh -T -p 443 git@ssh.github.com
+```
+
+2. 使用 `vim ~/.ssh/config` 添加下面的配置：
+
+```
+Host github.com
+Hostname ssh.github.com
+Port 443
+User # 用户名，可以使用 git config -l，然后查看 user.name 中填写的用户名
+```
+
+参考资料：[解决 ssh: connect to host github.com port 22: Connection timed out](https://segmentfault.com/a/1190000040896781)
