@@ -97,3 +97,9 @@ User # 用户名，可以使用 git config -l，然后查看 user.name 中填写
 ```
 
 参考资料：[解决 ssh: connect to host github.com port 22: Connection timed out](https://segmentfault.com/a/1190000040896781)
+
+## Windows 上无法在命令行使用 node 等命令
+
+在环境变量都设置成功的情况下，如果无法运行一些程序，可能是权限不足。
+
+解决方案：使用“管理员”来运行命令行工具
