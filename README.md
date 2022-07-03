@@ -53,6 +53,30 @@ alias proxyoff='unset http_proxy;unset https_proxy'
 
 使用的时候，输入 `proxyon` 打开命令行，输入 `proxyoff` 关闭命令行代理。
 
+## Mac 中，使用 ClashX 实现命令行代理
+
+直接在 `.zshrc` 或者 `.bash_profile` 中添加以下语句：
+
+```
+function proxy_on() {
+    export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+    export http_proxy="http://127.0.0.1:7890"
+    export https_proxy=$http_proxy
+    #export all_proxy=socks5://127.0.0.1:7890 # or this line
+    echo -e "已开启代理"
+}
+
+function proxy_off(){
+    unset http_proxy
+    unset https_proxy
+    echo -e "已关闭代理"
+}
+```
+
+然后使用的时候，在命令行输入 `proxy_on`。关闭的时候，输入 `proxy_off`。
+
+解决方案来自[利用ClashX进行MAC（macOS Catalina）终端代理设置](https://blog.csdn.net/DSZhappy/article/details/108393159)
+
 ## 想在 Shell 中使用 vi 模式
 
 在 Bash 下使用和 VIM 一样的操作模式，可以在命令行中输入 `set -o vi`。
