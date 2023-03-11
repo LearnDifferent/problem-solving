@@ -131,3 +131,9 @@ User # 用户名，可以使用 git config -l，然后查看 user.name 中填写
 ## Docker 无法在 CentOS 上使用
 
 解决方案：使用 CentOS 7 的版本，并且不要使用 yum 来安装。
+
+## 在 iPhone / iOS 设备拍摄的 HEIC 格式照片转换为 jpg 格式的图片
+
+1. 在 Mac 上选择（可以批量选择） HEIC 格式的照片
+2. 点击右键，在菜单中选择【快速操作】->【转换图像】
+3. 点击【转换为 JPEG】选项
