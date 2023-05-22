@@ -146,6 +146,10 @@ User # 用户名，可以使用 git config -l，然后查看 user.name 中填写
 
 打开微信，点击【我】->【设置】->【设备】->【Watch 微信】->【回复模板】
 
+## 网页长截图
+
+按 F12 调出调试工具，使用快捷键 Command(Ctrl) + Shift + p 进入命令模式，然后输入 Capture full size screenshot 即可。
+
 ## 在 Chrome 上设置地址栏的快捷键，用于快速打开指定网站
 
 进入【设置】，点击【搜索引擎】，点击【管理搜索引擎和网站搜索】。
