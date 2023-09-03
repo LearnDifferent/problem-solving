@@ -161,3 +161,9 @@ User # 用户名，可以使用 git config -l，然后查看 user.name 中填写
 ## IDEA 快速在 Finder 或 File Explorer 中打开文件
 
 按住 command 或 ctrl 按键，点击 IDEA 的文件标签页（Tab），就可以弹出一个文件列表，点击文件列表中的文件，就可以在 Finder 或 File Explorer 中打开该文件。
+
+## 在 IDEA 中编写 MyBatis 的 Mapper XML 文件时，连接 database 实现 SQL 提示
+
+在 IDEA 的设置中，点击 Languages & Frameworks -> SQL Resolution Scopes，然后在 Project mapping 中，取消全选，最后选择当前连接的数据库。
+
+如果在 Mapper XML 文件中还是没有关联成功，随便输入一个 `ON DUPLICATE KEY UPDATE` 之类的特殊语法，然后 IDEA 会提示切换当前文件的 SQL dialect，切换为需要的“方言”（比如 MySQL）即可。
