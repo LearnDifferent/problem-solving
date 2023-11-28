@@ -167,3 +167,11 @@ User # 用户名，可以使用 git config -l，然后查看 user.name 中填写
 在 IDEA 的设置中，点击 Languages & Frameworks -> SQL Resolution Scopes，然后在 Project mapping 中，取消全选，最后选择当前连接的数据库。
 
 如果在 Mapper XML 文件中还是没有关联成功，随便输入一个 `ON DUPLICATE KEY UPDATE` 之类的特殊语法，然后 IDEA 会提示切换当前文件的 SQL dialect，切换为需要的“方言”（比如 MySQL）即可。
+
+## Homebrew 出现错误 Error: unknown or unsupported macOS version: :dunno
+
+场景：在 Homebrew 使用 `brew uninstall --cask [app_name]` 命令的时候，返回了一个 `Error: unknown or unsupported macOS version: :dunno` 的错误信息
+
+在 [devv.ai](https://devv.ai/) 中搜索了一下，叫我执行 `brew update-reset` 命令，我试了一下，又返回一个信息 `Do not report this issue until you've run brew update and tried again.` 。
+
+最终，在我运行了 `brew update` 后，再次使用 `brew uninstall --cask [app_name]` 命令就成功卸载了该软件。
