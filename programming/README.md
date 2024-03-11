@@ -10,6 +10,16 @@
 
 Maven 打包的时候，没有将 prod 环境的 application-prod.yml 打包进去。
 
+## Maven 下载依赖的时候，一直报错 `Could not find artifact xxx` ，重新加载 Maven 也不行
+
+问题描述：
+
+使用 Maven 下载依赖的时候，因为各种原因（比如网络）而下载依赖失败的时候，因为 `～/.m2/repository` 路径下已经下载了一部份依赖，所以 Maven 会以为依赖已经下载好了。
+
+解决方案：
+
+去到 `～/.m2/repository` 路径下，找到对应的依赖的路径那里，然后直接删掉该文件夹，再重新加载 Maven 就可以触发依赖的重新下载。
+
 ## 内存泄漏（Memory Leak）
 
 问题描述：
