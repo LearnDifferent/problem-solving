@@ -175,3 +175,15 @@ User # 用户名，可以使用 git config -l，然后查看 user.name 中填写
 在 [devv.ai](https://devv.ai/) 中搜索了一下，叫我执行 `brew update-reset` 命令，我试了一下，又返回一个信息 `Do not report this issue until you've run brew update and tried again.` 。
 
 最终，在我运行了 `brew update` 后，再次使用 `brew uninstall --cask [app_name]` 命令就成功卸载了该软件。
+
+## Mac 通过 BootCamp 安装 Windows 10 后设置触控板滚动/滑动方向
+
+[解决方案](https://blog.csdn.net/wjf_hb/article/details/122698482) ：
+
+- 在 Win10 控制面版找到鼠标
+- 在鼠标属性窗口选择【硬件】标签
+- 通过 cmd 命令 `regedit` 打开注册表
+- 在 `计算机\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\HID\VID_05AC&PID_027E&MI_02&Col01\8&31def279&0&0000\Device Parameters` 找到 `FlipFlopWheel` 将数据由 0 设置为 1
+- 重启 Win10
+
+![](https://img-blog.csdnimg.cn/54b4e222c8ce4ba6a9d48c993677ff8b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5YWD6aOe,size_20,color_FFFFFF,t_70,g_se,x_16)
