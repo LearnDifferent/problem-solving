@@ -187,3 +187,13 @@ User # 用户名，可以使用 git config -l，然后查看 user.name 中填写
 - 重启 Win10
 
 ![](https://img-blog.csdnimg.cn/54b4e222c8ce4ba6a9d48c993677ff8b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5YWD6aOe,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+## Obsidian 的换行是普通的换行，不是 Typora 的那种两个换行的换行
+
+[解决方案](https://forum-zh.obsidian.md/t/topic/9242) :
+
+1. 在 Obsidian 的【设置】->【第三方插件】->【社区插件市场】中找到 `Easy Typing` 插件并安装
+2. 在【已安装插件】中找到 `Easy Typing` ，点击【选项】进入设置选项页面，滑到最下面，打开【Strict Line breaks Mode Enter Twice】
+3. 回到 Obsidian 的设置页面，找到【编辑器】选项，在该选项中，打开【严格换行】
+
+这样就可以在 Obsidian 中实现一个回车键输入双换行。
