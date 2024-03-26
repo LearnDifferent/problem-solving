@@ -71,3 +71,18 @@ Search: to_number\((?:[^()]*|\((?:[^()]*|\([^()]*\))*\))*\)
 Replace: decode($0, 0, '-', $0)
 ```
 
+## IDEA 配置微服务的多实例
+
+IDEA 判断一个项目为微服务时，会有一个【Services】选项。我们可以在该选项中快速管理微服务项目。
+
+如果一个服务希望有多个实例，可以在【Services】选项中，找到希望开启多个实例的服务名，然后【右键】->【Copy Configuration...】打开【Edit Configuration】选项（也可以使用 ctrl + D / Command + D 打开）。
+
+在【Edit Configuration】选项中，【Name】的输入框可以修改新实例的名称。
+
+在【Edit Configuration】选项中，最关键的是修改端口。展开【Environment】，在【VM options】的输入框中，输入 `-Dserver.port=端口号` 来映射新的端口号。
+
+设置完毕后，点击最下方的【OK】就可以了。
+
+此时去【Not Started】里面就能找到新创建好的实例。
+
+> 相关内容可以查看 [LearnDifferent/spring-cloud-demo 的 notes.md](https://github.com/LearnDifferent/spring-cloud-demo/blob/master/notes/notes.md#idea-%E9%85%8D%E7%BD%AE%E5%A4%9A%E5%AE%9E%E4%BE%8B%E6%8A%80%E5%B7%A7)
