@@ -188,6 +188,12 @@ User # 用户名，可以使用 git config -l，然后查看 user.name 中填写
 
 ![](https://img-blog.csdnimg.cn/54b4e222c8ce4ba6a9d48c993677ff8b.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA5YWD6aOe,size_20,color_FFFFFF,t_70,g_se,x_16)
 
+
+## 消除 Mac 上的未读信息 / 未读短信
+
+打开【信息 App】，点击上方状态栏/菜单栏上的【显示】，点击【未读信息】，选中第一条后，按住 shift 按键，然后划到最后一条，最后鼠标右键，点击【标记为已读】。
+
+或者，直接使用 Siri，让 Siri 帮忙“标记所有信息为已读”或“阅读所有未读短信”。
 ## Obsidian 的换行是普通的换行，不是 Typora 的那种两个换行的换行
 
 [解决方案](https://forum-zh.obsidian.md/t/topic/9242) :
