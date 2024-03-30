@@ -86,3 +86,29 @@ IDEA 判断一个项目为微服务时，会有一个【Services】选项。我�
 此时去【Not Started】里面就能找到新创建好的实例。
 
 > 相关内容可以查看 [LearnDifferent/spring-cloud-demo 的 notes.md](https://github.com/LearnDifferent/spring-cloud-demo/blob/master/notes/notes.md#idea-%E9%85%8D%E7%BD%AE%E5%A4%9A%E5%AE%9E%E4%BE%8B%E6%8A%80%E5%B7%A7)
+
+## 使用 Java 9 以上版本启动 JDK 8 及以前的程序时报错
+
+问题描述：我使用的是 M 系列的 Mac，17.0.6 版本的 JDK 启动 Sentinel 1.8.1 的 jar 包时报错，详细内容可以查看 [我的 spring-cloud-demo 中的记录](https://github.com/LearnDifferent/spring-cloud-demo/blob/master/notes/Sentinel_Startup_Error.md)
+
+简单来说就是因为 Java 9及以上版本中引入的模块系统（Project Jigsaw）。而我的错误信息中提到 `java.lang.reflect.InaccessibleObjectException` ，即尝试访问一个模块中的类或成员时，但没有相应的`opens`声明来允许这种访问。
+
+从堆栈跟踪来看，问题出现在 Spring 框架使用 CGLIB 进行动态代理时，尝试访问 `java.lang.ClassLoader.defineClass` 方法，但是这个访问被Java模块系统阻止了。
+
+解决方案就是添加 JVM 启动参数：
+
+```bash
+--add-opens java.base/java.lang=ALL-UNNAMED
+```
+
+这个参数的作用是允许所有未命名模块（即传统的 classpath 上的代码）访问 `java.base` 模块中的 `java.lang` 包。
+
+>如果是在IDE中运行，需要在运行配置中添加这个 VM 选项
+
+最后，我成功启动 Sentinel 的命令如下：
+
+```bash
+java --add-opens java.base/java.lang=ALL-UNNAMED -jar sentinel-dashboard-1.8.1.jar
+```
+
+
