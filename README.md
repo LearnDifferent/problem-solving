@@ -203,3 +203,14 @@ User # 用户名，可以使用 git config -l，然后查看 user.name 中填写
 3. 回到 Obsidian 的设置页面，找到【编辑器】选项，在该选项中，打开【严格换行】
 
 这样就可以在 Obsidian 中实现一个回车键输入双换行。
+
+## Windows 11 安装 WSL / Ubuntu 报错
+
+通过命令行或 Microsoft Store 安装 Ubuntu 后，会报错：
+
+```
+Installing, this may take a few minutes... WslRegisterDistribution failed with error: 0x800701bc
+```
+解决方案：
+
+参考 [知乎这篇文章 - Windows 11 安装 WSL2](https://zhuanlan.zhihu.com/p/475462241) 底下的回复，跳转到 [WSL安装无法打开（WslRegisterDistribution failed with error: 0x800701bc......）](https://blog.csdn.net/qq_40846862/article/details/119609971) 这篇文章，然后点击文章里面的链接下载 [WSL 2 的最新内核](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi) ，安装后就解决了。
