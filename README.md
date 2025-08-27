@@ -214,3 +214,80 @@ Installing, this may take a few minutes... WslRegisterDistribution failed with e
 解决方案：
 
 参考 [知乎这篇文章 - Windows 11 安装 WSL2](https://zhuanlan.zhihu.com/p/475462241) 底下的回复，跳转到 [WSL安装无法打开（WslRegisterDistribution failed with error: 0x800701bc......）](https://blog.csdn.net/qq_40846862/article/details/119609971) 这篇文章，然后点击文章里面的链接下载 [WSL 2 的最新内核](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi) ，安装后就解决了。
+
+## Mac 使用 Ivanti Secure Access Client 作为 VPN 连接公司内网，且设置了外部代理后，无法访问除了内网外的其他网站
+
+Ivanti Secure Access Client 作为 VPN 连接公司内网后，需要设置系统网络代理，转发需要访问外部的流量请求，来实现访问外部网络的功能。但是明明在 Windows 电脑上成功设置代理，在 Mac 电脑上却不行。
+
+解决方案：
+
+问了 Kimi 后，给了一个答案，修改后如下所示：
+
+macOS 上直接用 [Clash Verge Rev](https://github.com/clash-verge-rev/clash-verge-rev) 强行接管全部流量（含 VPN 内网流量），从而把「外网」全部甩给代理 10.168.60.41:8080 的完整步骤。
+按顺序做，基本 3 分钟搞定。
+1️⃣ 装内核 + 授权：就是找到系统的 TUN 模式开关，根据提示需要安装内核
+2️⃣ 写配置文件
+把下面内容保存为 ~/Documents/corp.yml（文件名随意），只改两处即可：
+
+```yaml
+mixed-port: 7890           # 本地监听端口，默认 7890
+allow-lan: false
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:9090
+
+# 1. 把你公司给的 HTTP 代理写成一个「节点」
+proxies:
+  - name: "Corp-HTTP"
+    type: http
+    server: 10.168.60.41
+    port: 8080
+    username: ""
+    password: ""
+
+proxy-groups:
+  - name: "🌐 Proxy"
+    type: select
+    proxies: [Corp-HTTP, DIRECT]
+
+# 2. 分流规则：把公司内网域名/网段全部 DIRECT，其余全部走代理
+rules:
+  - DOMAIN-SUFFIX,jenkins-rcicd-uat.apps.ocpuat.pccw.com,DIRECT
+  - DOMAIN-SUFFIX,np3.uamp.hkt.com,DIRECT
+  - DOMAIN-SUFFIX,np3.muleamp.hkt.com,DIRECT
+  - DOMAIN-SUFFIX,rcicd-jenkins-uat.hkt.com,DIRECT
+  - DOMAIN-SUFFIX,nspm-sc.pccw.com,DIRECT
+  - DOMAIN-SUFFIX,prcportal.pccw.com,DIRECT
+  - DOMAIN-SUFFIX,np4.uamp.hkt.com,DIRECT
+  - IP-CIDR,10.168.124.0/24,DIRECT
+  - IP-CIDR,10.168.60.0/24,DIRECT
+  - MATCH,🌐 Proxy          # 剩下的全部走公司 HTTP 代理
+```
+
+3️⃣ 载入配置
+Profiles → 新建 → 类型选 Local → 指向刚才的 hkt.yml → 设为激活配置。
+
+这一步根据 Clash Verge Rev 的版本不同，有所区别，总体就是设置一个“本地订阅”。
+
+4️⃣ 打开 TUN 模式（强制接管）
+Settings → Network
+关闭 System Proxy（系统代理）
+打开 TUN Mode → 旁边齿轮 → Stack 选 Mixed，Strict Route ON
+重启 Clash Verge（菜单栏图标 → Quit → 再开）
+首次会再要一次密码创建虚拟网卡，看到日志里出现 TUN interface utunX created 即成功。
+
+这一步也是根据版本不同，总之就是设置 TUN 模式
+
+5️⃣ 验证
+浏览器开 ip.skk.moe → IP 应显示 10.168.60.41 的出口。
+nslookup jenkins-rcicd-uat.apps.ocpuat.pccw.com → 仍可解析并直连。
+ping 10.168.124.8 正常；ping 8.8.8.8 也正常（说明外网走了 HTTP 代理）。
+
+6️⃣ 一键恢复
+如果哪天不用了，把 TUN Mode 关掉、退出 Clash Verge，系统网络瞬间恢复，无需改任何系统代理/PAC。
+
+⚠️ 注意
+公司代理需要认证的话，在 username/password 里填。
+如果还想让手机等设备走你这台 Mac，打开 Settings → Allow LAN，然后在手机 Wi-Fi 手动填 HTTP 代理（Mac 的局域网 IP + 7890）。
+
+
